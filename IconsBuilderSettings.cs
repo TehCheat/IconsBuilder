@@ -29,6 +29,10 @@ namespace IconsBuilder
         public ToggleNode ShowSmallChest { get; set; } = new ToggleNode(false);
         [Menu("Size small chests icon")]
         public RangeNode<int> SizeSmallChestIcon { get; set; } = new RangeNode<int>(10, 1, 50);
+        [Menu("Show delve paths")]
+        public ToggleNode ShowDelvePaths { get; set; } = new ToggleNode(false);
+        [Menu("Size delve paths")]
+        public RangeNode<int> SizeDelvePaths { get; set; } = new RangeNode<int>(10, 1, 50);
         [Menu("Size misc icon")]
         public RangeNode<int> SizeMiscIcon { get; set; } = new RangeNode<int>(10, 1, 50);
         [Menu("Size shrine icon")]

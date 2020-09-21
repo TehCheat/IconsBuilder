@@ -106,6 +106,7 @@ namespace IconsBuilder
         public override void OnLoad()
         {
             Graphics.InitImage("sprites.png");
+            Graphics.InitImage("Icons.png");
         }
 
         public override void EntityIgnored(Entity Entity)
@@ -251,6 +252,10 @@ namespace IconsBuilder
                 return new MiscIcon(entity, GameController, Settings);
 
             if (entity.Path.Contains("Metadata/Terrain/Leagues/Delve/Objects/EncounterControlObjects/AzuriteEncounterController"))
+                return new MiscIcon(entity, GameController, Settings);
+
+            //delve paths
+            if (entity.Path.EndsWith("Metadata/Terrain/Leagues/Delve/Objects/DelveLight"))
                 return new MiscIcon(entity, GameController, Settings);
 
             if (entity.Type == EntityType.LegionMonolith) return new MiscIcon(entity, GameController, Settings);

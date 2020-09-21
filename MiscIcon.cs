@@ -35,7 +35,13 @@ namespace IconsBuilder
                 Text = RenderName;
                 Priority = IconPriority.VeryHigh;
                 if (entity.GetComponent<MinimapIcon>().Name.Equals("DelveRobot", StringComparison.Ordinal)) Text = "Follow Me";
-
+                //Delve Walls
+                if (entity.Path.Contains("Metadata/Terrain/Leagues/Delve/Objects/DelveWall"))
+                {
+                    MainTexture.Size = settings.SizeChestIcon;
+                    MainTexture.UV = SpriteHelper.GetUV(MapIconsIndex.Entrance);
+                    Show = () => entity.IsAlive;
+                }
                 return;
             }
 
@@ -110,6 +116,13 @@ namespace IconsBuilder
                     Show = () => entity.IsValid && entity.GetComponent<Transitionable>().Flag1 < 3;
                     MainTexture.UV = SpriteHelper.GetUV(MapIconsIndex.PartyLeader);
                 }
+            }
+            //delve paths
+            if (entity.Path.Contains("Objects/DelveLight") && entity.HasComponent<Preload>())
+            {
+                MainTexture.Size = settings.SizeDelvePaths;
+                MainTexture.UV = SpriteHelper.GetUV(MapIconsIndex.LootFilterSmallYellowCircle);
+                Show = () => entity.IsAlive && settings.ShowDelvePaths;
             }
         }
     }
