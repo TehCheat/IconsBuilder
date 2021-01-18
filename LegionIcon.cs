@@ -72,8 +72,13 @@ namespace IconsBuilder
                 if (entity.HasComponent<ObjectMagicProperties>())
                 {
                     var objectMagicProperties = entity.GetComponent<ObjectMagicProperties>();
+                    if (objectMagicProperties == null)
+                        return;
 
                     var mods = objectMagicProperties.Mods;
+                    if (mods == null)
+                        return;
+
                     if (mods.Contains("MonsterConvertsOnDeath_")) Show = () => entity.IsValid && entity.IsAlive && entity.IsHostile;
 
                     modName = mods.FirstOrDefaultF(modIcons.ContainsKey);
@@ -118,7 +123,7 @@ namespace IconsBuilder
 
                 if (statDictionary.TryGetValue(GameStat.MonsterMinimapIcon, out var indexMinimapIcon))
                 {
-                    var name = (MapIconsIndex) indexMinimapIcon;
+                    var name = (MapIconsIndex)indexMinimapIcon;
                     Text = name.ToString().Replace("Legion", "");
                     Priority = IconPriority.Critical;
 
@@ -134,7 +139,12 @@ namespace IconsBuilder
                     Show = () => Entity.IsAlive && frozenCheck.Value;
                 }
                 else
+                {
+                    var life = Entity.GetComponent<Life>();
+                    if (life == null)
+                        return;
                     Show = () => !Hidden() && Entity.GetComponent<Life>().HPPercentage > 0.02;
+                }
             }
         }
     }
