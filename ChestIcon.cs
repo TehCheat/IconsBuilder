@@ -361,9 +361,9 @@ namespace IconsBuilder
                 case ChestType.Heist:
                         //DebugWindow.LogMsg(Entity.Path + " [ChestType.Fossil]");
                         //MainTexture.UV = SpriteHelper.GetUV(MyMapIconsIndex.Divination);
-                        Text = Entity.Path.Replace("Metadata/Chests/LeagueHeist/HeistChest", "").Replace("Thug", "")
+                        Text = settings.HeistText.Value ? Entity.Path.Replace("Metadata/Chests/LeagueHeist/HeistChest", "").Replace("Thug", "")
                             .Replace("Science", "").Replace("Military", "").Replace("Robot", "")
-                            .Replace("Secondary", "");
+                            .Replace("Secondary", "") : ""; ;
 
                     //MainTexture.Color = Color.HotPink;
                     break;
