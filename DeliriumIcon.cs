@@ -47,7 +47,6 @@ namespace IconsBuilder
                     break;
                 default:
                     throw new ArgumentException("Delirium icon rarity corrupted.");
-                    break;
             }
 
             if (_HasIngameIcon && entity.HasComponent<MinimapIcon>() && !entity.GetComponent<MinimapIcon>().Name.Equals("NPC"))

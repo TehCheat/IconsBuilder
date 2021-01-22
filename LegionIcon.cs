@@ -48,7 +48,6 @@ namespace IconsBuilder
                     break;
                 default:
                     throw new ArgumentException("Legion icon rarity corrupted.");
-                    break;
             }
 
             if (entity.Path.StartsWith("Metadata/Monsters/LegionLeague/MonsterChest", StringComparison.Ordinal) || Rarity == MonsterRarity.Unique)

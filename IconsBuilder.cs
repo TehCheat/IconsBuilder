@@ -50,7 +50,6 @@ namespace IconsBuilder
         };
 
         private Queue<Entity> _addedIcon = new Queue<Entity>(128);
-        private int rnd = 1000;
 
         private void LoadConfig()
         {
