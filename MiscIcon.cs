@@ -52,7 +52,10 @@ namespace IconsBuilder
                         if (entity.HasComponent<MinimapIcon>())
                         {
                             var minimapIcon = entity.GetComponent<MinimapIcon>();
-                            isVisible = minimapIcon.IsVisible && !minimapIcon.IsHide;
+                            if(minimapIcon != null)
+                            { 
+                                isVisible = minimapIcon.IsVisible && !minimapIcon.IsHide;
+                            }
                         }
 
                         return entity.IsValid && isVisible && entity.IsTargetable;
