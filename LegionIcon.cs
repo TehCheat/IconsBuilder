@@ -117,8 +117,8 @@ namespace IconsBuilder
 
                 if (statDictionary.Count == 0)
                 {
-                    statDictionary = entity.GetComponentFromMemory<Stats>().ParseStats();
-                    if (statDictionary.Count == 0) Text = "Error";
+                    statDictionary = entity.GetComponentFromMemory<Stats>()?.ParseStats();
+                    if (statDictionary == null || statDictionary.Count == 0) Text = "Error";
                 }
 
                 if (statDictionary.TryGetValue(GameStat.MonsterMinimapIcon, out var indexMinimapIcon))
@@ -140,9 +140,6 @@ namespace IconsBuilder
                 }
                 else
                 {
-                    var life = Entity.GetComponent<Life>();
-                    if (life == null)
-                        return;
                     Show = () => !Hidden() && Entity.GetComponent<Life>()?.HPPercentage > 0.02;
                 }
             }
