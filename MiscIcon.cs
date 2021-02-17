@@ -34,7 +34,7 @@ namespace IconsBuilder
                 MainTexture.Size = settings.SizeDefaultIcon;
                 Text = RenderName;
                 Priority = IconPriority.VeryHigh;
-                if (entity.GetComponent<MinimapIcon>().Name.Equals("DelveRobot", StringComparison.Ordinal)) Text = "Follow Me";
+                if (entity.GetComponent<MinimapIcon>()?.Name.Equals("DelveRobot", StringComparison.Ordinal) ?? false) Text = "Follow Me";
 
                 return;
             }
@@ -52,10 +52,7 @@ namespace IconsBuilder
                         if (entity.HasComponent<MinimapIcon>())
                         {
                             var minimapIcon = entity.GetComponent<MinimapIcon>();
-                            if(minimapIcon != null)
-                            { 
-                                isVisible = minimapIcon.IsVisible && !minimapIcon.IsHide;
-                            }
+                            isVisible = minimapIcon?.IsVisible ?? false && !minimapIcon.IsHide;
                         }
 
                         return entity.IsValid && isVisible && entity.IsTargetable;
@@ -63,7 +60,7 @@ namespace IconsBuilder
                 }
             }
             else
-                Show = () => entity.IsValid && entity.GetComponent<MinimapIcon>().IsVisible;
+                Show = () => entity.IsValid && (entity.GetComponent<MinimapIcon>()?.IsVisible ?? false);
 
             if (entity.HasComponent<Transitionable>() && entity.HasComponent<MinimapIcon>())
             {
@@ -71,26 +68,26 @@ namespace IconsBuilder
                 {
                     MainTexture.UV = SpriteHelper.GetUV(MapIconsIndex.AbyssCrack);
 
-                    Show = () => entity.IsValid && (entity.GetComponent<MinimapIcon>().IsHide == false ||
-                                                    entity.GetComponent<Transitionable>().Flag1 == 1);
+                    Show = () => entity.IsValid && (entity.GetComponent<MinimapIcon>()?.IsHide ?? true == false ||
+                                                    (entity.GetComponent<Transitionable>()?.Flag1 ?? 0) == 1);
                 }
 
                 else if (entity.Path.Equals("Metadata/MiscellaneousObjects/Abyss/AbyssStartNode"))
                 {
                     MainTexture.UV = SpriteHelper.GetUV(MapIconsIndex.Abyss);
 
-                    Show = () => entity.IsValid && (entity.GetComponent<MinimapIcon>().IsHide == false ||
-                                                    entity.GetComponent<Transitionable>().Flag1 == 1);
+                    Show = () => entity.IsValid && (entity.GetComponent<MinimapIcon>()?.IsHide ?? true == false ||
+                                                    (entity.GetComponent<Transitionable>()?.Flag1 ?? 0) == 1);
                 }
                 else if (entity.Path.Equals("Metadata/MiscellaneousObjects/Abyss/AbyssNodeSmall", StringComparison.Ordinal) ||
                          entity.Path.Equals("Metadata/MiscellaneousObjects/Abyss/AbyssNodeLarge", StringComparison.Ordinal) ||
                          entity.Path.StartsWith("Metadata/MiscellaneousObjects/Abyss/AbyssFinalNodeChest"))
                 {
-                    Show = () => entity.IsValid && (entity.GetComponent<MinimapIcon>().IsHide == false ||
-                                                    entity.GetComponent<Transitionable>().Flag1 == 1);
+                    Show = () => entity.IsValid && (entity.GetComponent<MinimapIcon>()?.IsHide ?? true == false ||
+                                                    (entity.GetComponent<Transitionable>()?.Flag1 ?? 0) == 1);
                 }
                 else if (entity.Path.StartsWith("Metadata/Terrain/Leagues/Incursion/Objects/IncursionPortal", StringComparison.Ordinal))
-                    Show = () => entity.IsValid && entity.GetComponent<Transitionable>().Flag1 < 3;
+                    Show = () => entity.IsValid && (entity.GetComponent<Transitionable>()?.Flag1 ?? 4) < 3;
                 else
                 {
                     Priority = IconPriority.Critical;
@@ -110,7 +107,7 @@ namespace IconsBuilder
                 {
                     Priority = IconPriority.High;
                     Text = "Start";
-                    Show = () => entity.IsValid && entity.GetComponent<Transitionable>().Flag1 < 3;
+                    Show = () => entity.IsValid && (entity.GetComponent<Transitionable>()?.Flag1 ?? 4) < 3;
                     MainTexture.UV = SpriteHelper.GetUV(MapIconsIndex.PartyLeader);
                 }
             }
