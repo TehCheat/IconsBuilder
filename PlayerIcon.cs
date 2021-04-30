@@ -18,7 +18,7 @@ namespace IconsBuilder
             Show = () => entity.IsValid && !settings.HidePlayers;
             if (_HasIngameIcon) return;
             MainTexture = new HudTexture("Icons.png") {UV = SpriteHelper.GetUV(MapIconsIndex.OtherPlayer)};
-            Text = entity.GetComponent<Player>().PlayerName;
+            Text = entity.GetComponent<Player>()?.PlayerName ?? "";
         }
     }
 }
