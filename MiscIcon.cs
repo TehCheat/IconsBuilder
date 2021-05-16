@@ -23,6 +23,11 @@ namespace IconsBuilder
 
         public void Update(Entity entity, IconsBuilderSettings settings)
         {
+            if (entity == null)
+            {
+                return;
+            }
+
             if (!_HasIngameIcon)
             {
                 MainTexture = new HudTexture();
