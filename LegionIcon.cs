@@ -60,7 +60,7 @@ namespace IconsBuilder
                 Show = () =>
                 {
                     if (Entity.IsValid)
-                        return Entity.GetComponent<Life>().HPPercentage > 0.02;
+                        return Entity.GetComponent<Life>()?.HPPercentage > 0.02;
 
                     return Entity.IsAlive;
                 };
